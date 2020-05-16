@@ -20,7 +20,7 @@ def ivao():
         user_id = Col('ID')
         nome = Col('NOME')
         curso = Col('CURSO')
-        estado = Col('ESTADO')
+        # estado = Col('ESTADO')
 
     class Item(object):
         def __init__(self, user_id, nome, curso):
