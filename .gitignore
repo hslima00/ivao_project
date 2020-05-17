@@ -1,27 +1,10 @@
-.history/main_20200515195531.py
-.history/main_20200515201634.py
-.history/main_20200515201707.py
-.history/main_20200515201724.py
-.history/main_20200515201735.py
-.history/main_20200515202259.py
-.history/main_20200515202403.py
-.history/main_20200515202509.py
-.history/main_20200515203028.py
-.history/main_20200515203247.py
-.history/main_20200515203249.py
-.history/main_20200515203251.py
-.history/main_20200515203257.py
-.history/main_20200515203531.py
-.history/main_20200515203616.py
-.history/main_20200515203745.py
-.history/main_20200515203756.py
-.history/main_20200515203809.py
-.history/main_20200515204123.py
-.history/main_20200515204144.py
-.history/main_20200515204147.py
-.history/main_20200515204415.py
-.history/main_20200515204708.py
-.history/main_20200515205331.py
-.history/main_20200515205558.py
-.history/main_20200515205715.py
-.history/main_20200515205741.py
+# vscode files
+.history/
+.vscode/
+
+# pycharm files
+.idea/
+
+# python files
+__pycache__
+*.ini
