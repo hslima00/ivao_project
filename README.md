@@ -2,6 +2,10 @@
 This project generates a website that displays the online/offline status of all the friends in an IVAO WebEye Account.
 
 ### Requirements
+
+Project **only** runs on a Windows with Chrome v81 installed due to the ChromeDriver binary!
+This issue will be addressed eventually!
+
 The following files must be provided in the project's root directory:
 
 #### config.ini
