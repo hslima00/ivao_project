@@ -43,7 +43,8 @@ def ivao():
                 item = {"user_id": line[0],
                         "nome": line[1],
                         "curso": line[2],
-                        "estado": line[3]}  # 0=0ff 1=On}
+                        # simple hack to check if IDs on friends.csv appear on the online_friends list
+                        "estado": 1 if line[0] in ' '.join([item for person in online_friends for item in person]) else 0}  # 0=0ff 1=On}
                 item_list.append(item)
     except FileNotFoundError:
         raise FileNotFoundError('friends.csv NOT found! Please create one as specified in the README!')

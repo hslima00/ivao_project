@@ -5,6 +5,8 @@ from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 
+# todo: get all friends to generate website table and specify which ones are online
+
 
 def get_online_friends(user: str, password: str):
     """
@@ -34,11 +36,11 @@ def get_online_friends(user: str, password: str):
         try:
             # navigate to friends
             wait.until(lambda a: a.find_element_by_link_text('Friends')).click()
+            # todo: this find element can be improved to a more specific one
             online_table = wait.until(lambda a: a.find_element_by_id('uiOnlineFriendListTable'))
         except TimeoutException:
             raise LoginInvalidError('TimeoutException when attempting to find Friends tab - login may be invalid!')
-
-        rows = online_table.find_elements_by_xpath(".//tbody/tr")
+        rows = WebDriverWait(online_table, 2).until(lambda a: a.find_elements_by_xpath(".//tbody/tr"))
 
         # case all friends offline
         if not rows:
