@@ -1,14 +1,25 @@
-from flask import Flask, render_template, request
-from flask_table import Table, Col
+import configparser
 import csv
-import array
+import os
+
+from flask import Flask, render_template
+from webeye import get_online_friends, LoginInvalidError
 
 csv_name = 'teste.csv'
 app = Flask(__name__)
 
+config = configparser.ConfigParser()
+config.read(os.path.join(os.path.dirname(__file__), 'config.ini'))
+
 
 @app.route("/")
 def ivao():
+
+    online_friends = []
+    try:
+        online_friends = get_online_friends(config['ACCOUNT']['user'], config['ACCOUNT']['password'])
+    except LoginInvalidError:
+        return '<h1>WebEye login invalid<h1>'
 
     item_list = []
 

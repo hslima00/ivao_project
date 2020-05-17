@@ -1,3 +1,4 @@
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
@@ -16,7 +17,7 @@ def get_online_friends(user: str, password: str):
 
     # start chrome driver
     with Chrome(options=options) as driver:
-        wait = WebDriverWait(driver, 10)
+        wait = WebDriverWait(driver, 3)
         driver.get("https://webeyetemp.ivao.aero/")
 
         # navigate to login
@@ -28,10 +29,13 @@ def get_online_friends(user: str, password: str):
 
         # send login form
         wait.until(lambda a: a.find_element_by_name('login')).click()
+        try:
+            # navigate to friends
+            wait.until(lambda a: a.find_element_by_link_text('Friends')).click()
+            online_table = wait.until(lambda a: a.find_element_by_id('uiOnlineFriendListTable'))
+        except TimeoutException:
+            raise LoginInvalidError('TimeoutException when attempting to find Friends tab - login may be invalid!')
 
-        # navigate to friends
-        wait.until(lambda a: a.find_element_by_link_text('Friends')).click()
-        online_table = wait.until(lambda a: a.find_element_by_id('uiOnlineFriendListTable'))
         rows = online_table.find_elements_by_xpath(".//tbody/tr")
 
         # case all friends offline
@@ -47,3 +51,7 @@ def get_online_friends(user: str, password: str):
                 person.append(td.text)
             output.append(person)
         return output
+
+
+class LoginInvalidError(Exception):
+    pass
