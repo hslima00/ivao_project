@@ -7,11 +7,14 @@ import os
 from flask import Flask, render_template
 from webeye import get_online_friends, LoginInvalidError
 
-csv_name = 'teste.csv'
+csv_name = 'friends.csv'
 app = Flask(__name__)
 
 config = configparser.ConfigParser()
-config.read(os.path.join(os.path.dirname(__file__), 'config.ini'))
+try:
+    assert config.read(os.path.join(os.path.dirname(__file__), 'config.ini'))
+except AssertionError:
+    raise FileNotFoundError('config.ini NOT found! Please create one as specified in the README!')
 
 
 @app.route("/")
@@ -31,15 +34,19 @@ def ivao():
 
     item_list = []
 
-    with open(csv_name) as csv_file:
-        read_csv = csv.reader(csv_file)
-        for line in read_csv:
+    try:
+        # todo: this file should be tested on startup
+        with open(csv_name) as csv_file:
+            read_csv = csv.reader(csv_file)
+            for line in read_csv:
 
-            item = {"user_id": line[0],
-                    "nome": line[1],
-                    "curso": line[2],
-                    "estado": line[3]}  # 0=0ff 1=On}
-            item_list.append(item)
+                item = {"user_id": line[0],
+                        "nome": line[1],
+                        "curso": line[2],
+                        "estado": line[3]}  # 0=0ff 1=On}
+                item_list.append(item)
+    except FileNotFoundError:
+        raise FileNotFoundError('friends.csv NOT found! Please create one as specified in the README!')
 
     return render_template('home.html', item_list=item_list, webeye_login_status=login_status)
 
