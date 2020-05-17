@@ -5,8 +5,6 @@ from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 
-# todo: get all friends to generate website table and specify which ones are online
-
 
 def get_online_friends(user: str, password: str):
     """
