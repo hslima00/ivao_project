@@ -7,7 +7,7 @@ csv_name = 'teste.csv'
 app = Flask(__name__)
 
 
-@app.route("/ivao")
+@app.route("/")
 def ivao():
 
     item_list = []
