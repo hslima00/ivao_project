@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import configparser
 import csv
 import os
@@ -16,10 +18,16 @@ config.read(os.path.join(os.path.dirname(__file__), 'config.ini'))
 def ivao():
 
     online_friends = []
+    # Se o login do webeye estiver inválido, este bloco tenta durante 5 segundos até dar timeout
+    # todo: implementar async para não bloquear a execução
+    # ------------------------------------------------------------------------------------------------------------------
     try:
         online_friends = get_online_friends(config['ACCOUNT']['user'], config['ACCOUNT']['password'])
+        login_status = 'WebEye login successful'
     except LoginInvalidError:
-        return '<h1>WebEye login invalid<h1>'
+        login_status = 'WebEye login invalid'
+
+    # ------------------------------------------------------------------------------------------------------------------
 
     item_list = []
 
@@ -33,7 +41,7 @@ def ivao():
                     "estado": line[3]}  # 0=0ff 1=On}
             item_list.append(item)
 
-    return render_template('home.html', item_list=item_list)
+    return render_template('home.html', item_list=item_list, webeye_login_status=login_status)
 
 
 if __name__ == "__main__":
