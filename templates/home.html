@@ -1,59 +1,31 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-  #customers {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
+    <head>
+        <link rel="stylesheet" href="../static/css/style.css">
+    </head>
+    <body>
+        <h1>Projeto IVAO</h1>
+        <table id="customers">
+            <caption>WORK IN PROGRESS</caption>
+            <tr>
+                <th>Nome</th>
+                <th>ID</th>
+                <th>Curso</th>
+                <th>Estado</th>
+            </tr>
+            {% for item in item_list %}
+                <tr>
+                    <td>{{item.nome}}</td>
+                    <td>{{item.user_id}}</td>
+                    <td>{{item.curso}}</td>
+                    {% if item.estado|int < 1  %}
+                        <td id="Off">Offline</td>
+                    {%else%}
+                        <td id = "On">Online</td>
+                    {%endif%}
+                </tr>
+            {% endfor %}
+        </table>
 
-#customers td, #customers th {
-  border: 1px solid #ddd;
-  padding: 8px;
-  #Off:{background-color:red};
-  #On:{background-color:white};
-}
-
-#customers tr:nth-child(even){background-color: #f2f2f2;}
-
-#customers tr:hover {background-color: #ddd;}
-
-#customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #4CAF50;
-  color: white;
-}
-caption {
-  caption-side: bottom;
-}
-</style>
-</head>
-<body>
-<h1>Projeto IVAO</h1>
-<table id="customers">
-<caption>WORK IN PROGRESS</caption>
-  <tr>
-    <th>Nome</th>
-    <th>ID</th>
-    <th>Curso</th>
-    <th>Estado</th>
-  </tr>
-  {% for item in item_list %}
-  <tr>
-     <td>{{item.nome}}</td>
-     <td>{{item.user_id}}</td>  
-     <td>{{item.curso}}</td> 
-     {% if item.estado|int < 1  %}
-     <td id="Off">Offline</td>
-     {%else%}
-     <td id = "On">Online</td>
-     {%endif%}
-  </tr>
-  {% endfor %}
-</table>
-
-</body>
+    </body>
 </html>
