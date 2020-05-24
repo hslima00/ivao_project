@@ -28,3 +28,8 @@ ivao_id,name,notes
 999,Perry Example,PanAm
 ```
 Eventually this file will be deprecated and data will be gathered from IVAO WebEye.
+
+
+
+#### To Do:
+Fix a bug: friends with special characters in their name are not displayed with special characters as expected
