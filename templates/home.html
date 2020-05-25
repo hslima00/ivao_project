@@ -13,12 +13,12 @@
                 <th>Curso</th>
                 <th>Estado</th>
             </tr>
-            {% for item in item_list %}
+            {% for user in users %}
                 <tr>
-                    <td>{{item.nome}}</td>
-                    <td>{{item.user_id}}</td>
-                    <td>{{item.curso}}</td>
-                    {% if item.estado|int < 1  %}
+                    <td>{{user.nome}}</td>
+                    <td>{{user.user_id}}</td>
+                    <td>{{user.curso}}</td>
+                    {% if user.estado|int < 1  %}
                         <td id="Off">Offline</td>
                     {%else%}
                         <td id = "On">Online</td>

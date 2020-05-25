@@ -35,7 +35,7 @@ def get_online_friends(user: str, password: str):
             # navigate to friends
             wait.until(lambda a: a.find_element_by_link_text('Friends')).click()
             # todo: this find element can be improved to a more specific one
-            online_table = wait.until(lambda a: a.find_element_by_id('uiOnlineFriendListTable'))
+            online_table = wait.until(lambda a: a.find_element_by_id('uiOfflineFriendListTable'))
         except TimeoutException:
             raise LoginInvalidError('TimeoutException when attempting to find Friends tab - login may be invalid!')
         rows = WebDriverWait(online_table, 2).until(lambda a: a.find_elements_by_xpath(".//tbody/tr"))

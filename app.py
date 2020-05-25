@@ -52,13 +52,14 @@ def run_webeye():
 		except FileNotFoundError:
 				raise FileNotFoundError('friends.csv NOT found! Please create one as specified in the README!')
 		'''-----------------'''
+		print(user_list)
 		return user_list, login_status
 
 users, webeye_login_status = run_webeye()
 print(users)
 
 @app.route("/")
-def ivao(users, webeye_login_status):		
+def ivao():		
 		return render_template('home.html', users=users, webeye_login_status=webeye_login_status)
 
 
