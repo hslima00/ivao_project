@@ -29,7 +29,7 @@ except AssertionError:
 online_friends = []
 
 def run_webeye():	
-		threading.Timer(100.0, run_webeye).start() #corre a função de x em x tempo x=run_time
+		threading.Timer(100.0, run_webeye).start() 
 		try:
 				online_friends = get_online_friends(config['ACCOUNT']['user'], config['ACCOUNT']['password'])
 				login_status = 'WebEye login successful'
