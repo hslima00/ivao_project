@@ -10,6 +10,7 @@ from webeye import get_online_friends, LoginInvalidError
 
 '''GLOBAL VARS'''
 csv_name = 'friends.csv'
+run_time = 100.0
 '''-----------------'''
 
 app = Flask(__name__)
@@ -24,12 +25,12 @@ except AssertionError:
 
 # Se o login do webeye estiver inválido, este bloco tenta durante 5 segundos até dar timeout
 # todo: implementar async para não bloquear a execução
-# Corre o webeye de x em x tempo, tempo definido pela global var webeye_rerun_time
+# Corre o webeye de x em x tempo, tempo definido pela global var run_time
 # ------------------------------------------------------------------------------------------------------------------
 online_friends = []
 
 def run_webeye():	
-		threading.Timer(100.0, run_webeye).start() 
+		threading.Timer(run_time, run_webeye).start() 
 		try:
 				online_friends = get_online_friends(config['ACCOUNT']['user'], config['ACCOUNT']['password'])
 				login_status = 'WebEye login successful'
@@ -39,7 +40,6 @@ def run_webeye():
 		'''ABRIR CSV FILE'''
 		user_list = []
 		try:
-				# todo: this file should be tested on startup
 				with open(csv_name) as csv_file:
 						read_csv = csv.reader(csv_file)
 						for line in read_csv:
